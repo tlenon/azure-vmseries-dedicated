@@ -41,7 +41,7 @@ locals {
 
 # Manage the network required for the topology.
 module "vnet" {
-  source = "../../modules/vnet"
+  source = "../modules/vnet"
 
   for_each = var.vnets
 
@@ -63,7 +63,7 @@ module "vnet" {
 }
 
 module "vnet_peering" {
-  source = "../../modules/vnet_peering"
+  source = "../modules/vnet_peering"
 
   local_peer_config = {
     vnet_name             = "tl-transit"
@@ -80,7 +80,7 @@ module "vnet_peering" {
 
 
 module "natgw" {
-  source = "../../modules/natgw"
+  source = "../modules/natgw"
 
   for_each = var.natgws
 
@@ -109,7 +109,7 @@ module "natgw" {
 
 # create load balancers, both internal and external
 module "load_balancer" {
-  source = "../../modules/loadbalancer"
+  source = "../modules/loadbalancer"
 
   for_each = var.load_balancers
 
@@ -144,7 +144,7 @@ module "load_balancer" {
 
 # create the actual VMSeries VMs and resources
 module "ai" {
-  source = "../../modules/application_insights"
+  source = "../modules/application_insights"
 
   for_each = toset(
     var.application_insights != null ? flatten(
@@ -214,7 +214,7 @@ resource "local_file" "bootstrap_xml" {
 }
 
 module "bootstrap" {
-  source = "../../modules/bootstrap"
+  source = "../modules/bootstrap"
 
   for_each = var.bootstrap_storage
 
@@ -230,7 +230,7 @@ module "bootstrap" {
 }
 
 module "bootstrap_share" {
-  source = "../../modules/bootstrap"
+  source = "../modules/bootstrap"
 
   for_each = { for k, v in var.vmseries : k => v if can(v.bootstrap_storage) }
 
@@ -273,7 +273,7 @@ resource "azurerm_availability_set" "this" {
 }
 
 module "vmseries" {
-  source = "../../modules/vmseries"
+  source = "../modules/vmseries"
 
   for_each = var.vmseries
 
@@ -322,7 +322,7 @@ module "vmseries" {
 }
 
 module "appgw" {
-  source = "../../modules/appgw"
+  source = "../modules/appgw"
 
   for_each = var.appgws
 
