@@ -53,6 +53,7 @@ vnets = {
     route_tables = {
       "management" = {
         name = "tl-mgmt-rt"
+        disable_bgp_route_propagation = false
         routes = {
           "private_blackhole" = {
             address_prefix = "10.0.0.16/28"
@@ -66,6 +67,7 @@ vnets = {
       }
       "private" = {
         name = "tl-private-rt"
+        disable_bgp_route_propagation = false
         routes = {
           "default" = {
             address_prefix         = "0.0.0.0/0"
@@ -84,6 +86,7 @@ vnets = {
       }
       "public" = {
         name = "tl-public-rt"
+        disable_bgp_route_propagation = true
         routes = {
           "mgmt_blackhole" = {
             address_prefix = "10.0.0.0/28"
@@ -97,6 +100,7 @@ vnets = {
       }
       "gateway" = {
         name = "tl-gateway-rt"
+        disable_bgp_route_propagation = false
         routes = {
           "spoke1" = {
             address_prefix = "10.0.0.0/24"
