@@ -90,10 +90,11 @@ resource "azurerm_network_security_rule" "this" {
 resource "azurerm_route_table" "this" {
   for_each = var.route_tables
 
-  name                = "${var.name_prefix}${each.value.name}"
-  location            = try(each.value.location, var.location)
-  resource_group_name = var.resource_group_name
-  tags                = var.tags
+  name                          = "${var.name_prefix}${each.value.name}"
+  disable_bgp_route_propagation = try(each.value.disable_bgp_route_propagation, each.value == 0 ? false : true)
+  location                      = try(each.value.location, var.location)
+  resource_group_name           = var.resource_group_name
+  tags                          = var.tags
 }
 
 locals {
