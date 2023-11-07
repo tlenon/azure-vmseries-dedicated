@@ -118,6 +118,7 @@ variable "route_tables" {
   Map of objects describing a Route Table.
   List of available attributes of each Route Table entry:
   - `name`: Name of a Route Table.
+  - `disable_bgp_route_propagation`: (optional|bool) If true route propagation is disabled.
   - `location` : (Optional) Specifies the Azure location where to deploy the resource.
   - `routes` : (Optional) Map of routes within the Route Table.
     List of available attributes of each route entry:
